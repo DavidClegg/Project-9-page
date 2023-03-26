@@ -50,7 +50,7 @@
     }
     /* I love this scrolling effect */
     h2{ 
-        font-weight: 1;
+        font-weight: 1000;
         margin:0;
         padding:0;
         position: sticky;
@@ -92,7 +92,7 @@
             <a href="">blog</a>
         </nav>
         <div>
-            <button id="mode" data-mode="light" onclick="changeMode()">dark</button>
+            <button id="mode" data-mode="light" onclick="changeMode()">🌓</button>
             <select name="" id="themeSelect">
                 <option value="0">a</option>
                 <option value="1">b</option>
@@ -127,29 +127,32 @@
     const mode = document.querySelector("#mode");
     const light = "light";
     const dark = "dark";
-    const theme = ["theme1","theme2","theme3","theme4",]
+    const theme = ["theme1","theme2","theme3","theme4",];
     let modeState = dark;
-    let currentTheme = theme[3];
-
+    let currentTheme = theme[0];
+    
+    function updateModeTheme(){
+        mode.innerText = {light: "🌞", dark: "🌓"}[modeState];
+        body.className = "";
+        body.classList.add(modeState);
+        body.classList.add(currentTheme);
+    }
     function changeMode(){
         if(modeState == light){
             modeState = dark;
         } else {
             modeState = light;
         }
-        mode.innerText = {light: "🌞", dark: "🌓"}[modeState];
-        body.className = "";
-        body.classList.add(modeState);
-        body.classList.add(currentTheme);
+        updateModeTheme();
     }
     function changeTheme(i){
         currentTheme = theme[i];
-        body.className = "";
-        body.classList.add(modeState);
-        body.classList.add(currentTheme);
+        updateModeTheme();
     }
+    
     const themeSelect = document.querySelector("#themeSelect");
     themeSelect.addEventListener("change", e=>{
         changeTheme(e.target.value)
     })
+
 </script>
