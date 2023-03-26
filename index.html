@@ -1,0 +1,155 @@
+<style>
+    :root{
+        --col: rgb(96, 138, 185);
+        --back: rgb(183, 227, 235);
+        --lightCol: black;
+        --lightBack: white;
+        --darkCol: white;
+        --darkBack: black;
+    }
+    body{
+        height: 100%;
+        color: var(--col);
+    }
+    body > section {
+        background: var(--back);
+    }
+    body.light{
+        --col: var(--lightCol);
+        --back: var(--lightBack);
+    }
+    body.dark{
+        --col: var(--darkCol);
+        --back: var(--darkBack);
+    }
+    body.dark h2{
+        text-shadow: 00px 00px 3rem var(--darkCol);
+        filter: brightness(200%);
+    }
+    menu{
+        color: black;
+        padding: 1rem;
+        background: rgb(235, 227, 227);
+        display: flex;
+        justify-content: space-between;
+    }
+    menu > div{
+        flex-grow: 1;
+        text-align: center;
+    }
+    menu > nav{
+        flex-grow: 2;
+        display: flex;
+        justify-content: space-around;
+    }
+    section{
+        min-height: 90%;
+        border: 0px red solid;
+        margin-bottom: -3em;
+        padding: 0rem;
+    }
+    /* I love this scrolling effect */
+    h2{ 
+        font-weight: 1;
+        margin:0;
+        padding:0;
+        position: sticky;
+        top: 30%;
+        font-size: 8rem;
+    }
+    /* Custom Theme Colours */
+    .theme1{
+        --lightCol:#0c3247;
+        --lightBack:#04ada2;
+        --darkCol:#04ada2;
+        --darkBack:#031e2c;
+    }
+    .theme2{
+        --lightCol:#400;
+        --lightBack:#a69;
+        --darkCol:#a7c;
+        --darkBack:rgb(51, 7, 7);
+    }
+    .theme3{
+        --lightCol:#500;
+        --lightBack:#ecb;
+        --darkCol:#eb9;
+        --darkBack:rgb(51, 6, 19);
+    }
+    .theme4{
+        --lightCol:#247;
+        --lightBack:#fd5;
+        --darkCol:#fd0;
+        --darkBack:rgb(10, 32, 43);
+    }
+</style>
+<body class="a b c d">
+    <menu>
+        <div>logo</div>
+        <nav>
+            <a href="">projects</a>
+            <a href="">about me</a>
+            <a href="">blog</a>
+        </nav>
+        <div>
+            <button id="mode" data-mode="light" onclick="changeMode()">dark</button>
+            <select name="" id="themeSelect">
+                <option value="0">a</option>
+                <option value="1">b</option>
+                <option value="2">c</option>
+                <option value="3">d</option>
+            </select>
+        </div>
+    </menu>
+    <section>
+        <h2>Welcome</h2>
+    </section>
+    <section>
+        <h2>Projects</h2>
+    </section>
+    <section>
+        <h2>About</h2>
+    </section>
+    <section>
+        <h2>Blog</h2>
+    </section>
+</body>
+<script>
+    /* Features             | Implementation
+        Light/Dark Switch   | Basic
+        Theme Select        | Basic
+        User Preferences    | None
+        Carousel            | None
+        Interactive Blog    | None
+        Fish Tank           | None
+    */
+    const body = document.querySelector("body");
+    const mode = document.querySelector("#mode");
+    const light = "light";
+    const dark = "dark";
+    const theme = ["theme1","theme2","theme3","theme4",]
+    let modeState = dark;
+    let currentTheme = theme[3];
+
+    function changeMode(){
+        if(modeState == light){
+            modeState = dark;
+        } else {
+            modeState = light;
+        }
+        mode.innerText = {light: "🌞", dark: "🌓"}[modeState];
+        body.className = "";
+        body.classList.add(modeState);
+        body.classList.add(currentTheme);
+    }
+    function changeTheme(i){
+        currentTheme = theme[i];
+        body.className = "";
+        body.classList.add(modeState);
+        body.classList.add(currentTheme);
+    }
+    const themeSelect = document.querySelector("#themeSelect");
+    themeSelect.addEventListener("change", e=>{
+        changeTheme(e.target.value)
+    })
+</script>
