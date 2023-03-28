@@ -11,6 +11,7 @@
         height: 100%;
         color: var(--col);
         background: var(--back);
+        font-size: 18px;
     }
     body > section {
         background: var(--back);
@@ -84,6 +85,115 @@
         --darkCol:#fd0;
         --darkBack:rgb(10, 32, 43);
     }
+    .placeholder{
+        height: 300px;
+        width: 300px;
+        /* background: #f700ff; */
+    }
+    #themeSelect{
+        border-radius: 10rem;
+        padding: 1rem;
+    }
+    #themeSelect > option{
+        appearance: none;
+        border-radius: 10rem;
+        padding: 1rem;
+    }
+    #mode{
+        border-radius: 10rem;
+        padding: 0rem;
+        font-size: 2rem;
+        text-align: center;
+        text-justify: center;
+        padding-bottom: 0.3rem;
+        padding-left: 0.2rem;
+        padding-right: 0.2rem;
+        border: none;
+        background-color: rgb(255, 255, 255);
+    }
+    .container{
+        display: grid;
+        grid-template-rows: repeat(12, 1fr);
+        grid-template-columns: repeat(12, 1fr);
+        width: 100%;
+        height: 60%;
+    }
+    .container > div{border: 1px solid black;}
+    #welcomeImage{
+        grid-column-start: 6;
+        grid-column-end: 11;
+        grid-row-start: 1;
+        grid-row-end: 13;
+        /* background: blue; */
+    }
+    #welcomeImage > img{
+        width: 100%;
+        border: 0px solid black;
+        border-radius: 2rem;
+        object-fit: cover;
+        transform: scaleX(-1);
+    }
+    #carousel{
+        grid-column-start: 5;
+        grid-column-end: 13;
+        grid-row-start: 1;
+        grid-row-end: 13;
+        background: red;
+    }
+    #carousel div.arrow{
+        display: none;
+    }
+    #slider{
+        width: 100%;
+        height: 90%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #slider > img{
+        display: none;
+        width: 800px;
+        object-fit: cover;
+        height: 450px;
+    }
+    #carousel #slider img.active{
+        display: block;
+    }
+    #aboutMe{
+        grid-column-start: 5;
+        grid-column-end: 13;
+        grid-row-start: 1;
+        grid-row-end: 13;
+        background: yellowgreen;
+        display: grid;
+        grid-template-columns: 3fr auto 1fr;
+        grid-template-rows: repeat(5, 1fr);
+
+    }
+    #aboutMe>div{
+        display: inline;
+        float:left;
+        justify-self: center;
+        grid-row-start: 2;
+        grid-row-end: 5;
+    }
+    #aboutMe>img{
+        width: 300px;
+        transform: scaleX(-1);
+        display: inline;
+        float: right;
+        
+        grid-row-start: 1;
+        grid-row-end: 13;
+        grid-column-start: 2;
+    }
+    #blogArticles{
+        grid-column-start: 4;
+        grid-column-end: 13;
+        grid-row-start: 1;
+        grid-row-end: 13;
+        background: rgb(255, 208, 0);
+    }
 </style>
 <body class="a b c d">
     <menu>
@@ -95,6 +205,7 @@
         </nav>
         <div>
             <button id="mode" data-mode="light" onclick="changeMode()">🌓</button>
+            Theme
             <select name="" id="themeSelect">
                 <option value="0">a</option>
                 <option value="1">b</option>
@@ -105,15 +216,49 @@
     </menu>
     <section>
         <h2>Welcome</h2>
+        <div class="placeholder container">
+            <div id="welcomeImage">
+                <img src="/assets/theme3-alpha-900px.png" alt="">
+            </div>
+        </div>
     </section>
     <section>
         <h2>Projects</h2>
+        <div class="placeholder container">
+            <div id="carousel">
+                <div class="arrow icon">Arrow</div>
+                <div id="slider">
+                    
+                    <img src="assets/websites/swipe.jpeg" alt="" class="active">
+                    <img src="assets/websites/langton.png" alt="">
+                    <img src="assets/websites/coffeeshop.jpeg" alt="">
+                    <img src="assets/websites/paralax.jpeg" alt="">
+                    <img src="assets/websites/rome.jpeg" alt="">
+                </div>
+                
+                <div class="arrow icon">Arrow</div>
+
+            </div>
+        </div>
     </section>
     <section>
         <h2>About</h2>
+        <div class="placeholder container">
+            <div id="aboutMe">
+                <div>
+                    <p>Hi👋</p>
+                    <p>I'm David</p>
+                    <p>I started learning web development 3 years ago. It was rough going, but I perservered and learned a diverse set of skills and interesting effects. Now I feel confident in my abilities to design, develop, and deploy solutions that improve the world around me.</p>
+                </div>
+                <img src="/assets/mypic/circrop300w.png" alt="">
+            </div>
+        </div>
     </section>
     <section>
         <h2>Blog</h2>
+        <div class="placeholder container">
+            <div id="blogArticles">Blog Articles</div>
+        </div>
     </section>
 </body>
 <script>
@@ -121,40 +266,58 @@
         Light/Dark Switch   | Basic
         Theme Select        | Basic
         User Preferences    | None
-        Carousel            | None
+        Carousel            | Basic
         Interactive Blog    | None
-        Fish Tank           | None
     */
-    const body = document.querySelector("body");
-    const mode = document.querySelector("#mode");
-    const light = "light";
-    const dark = "dark";
-    const theme = ["theme1","theme2","theme3","theme4",];
-    let modeState = dark;
-    let currentTheme = theme[0];
-    
-    function updateModeTheme(){
-        mode.innerText = {light: "🌞", dark: "🌓"}[modeState];
-        body.className = "";
-        body.classList.add(modeState);
-        body.classList.add(currentTheme);
-    }
-    function changeMode(){
-        if(modeState == light){
-            modeState = dark;
-        } else {
-            modeState = light;
+   Theme:
+   {
+        // Variables
+        const body = document.querySelector("body");
+        const mode = document.querySelector("#mode");
+        const themeSelect = document.querySelector("#themeSelect");
+        const light = "light";
+        const dark = "dark";
+        const theme = ["theme1","theme2","theme3","theme4",];
+        let modeState = dark;
+        let currentTheme = theme[0];
+        
+        // Functions
+        function updateModeTheme(){
+            mode.innerText = {light: "🌞", dark: "🌓"}[modeState];
+            body.className = "";
+            body.classList.add(modeState);
+            body.classList.add(currentTheme);
         }
-        updateModeTheme();
-    }
-    function changeTheme(i){
-        currentTheme = theme[i];
-        updateModeTheme();
-    }
-    
-    const themeSelect = document.querySelector("#themeSelect");
-    themeSelect.addEventListener("change", e=>{
-        changeTheme(e.target.value)
-    })
+        function changeMode(){
+            if(modeState == light){
+                modeState = dark;
+            } else {
+                modeState = light;
+            }
+            updateModeTheme();
+        }
+        function changeTheme(i){
+            currentTheme = theme[i];
+            updateModeTheme();
+        }
+        
+        // Events
+        themeSelect.addEventListener("change", e=>{
+            changeTheme(e.target.value)
+        })
+   }
+   Carousel:
+   {
+        // Variables
+        const active = "active";
+        const images = document.querySelectorAll("#slider img");
+        let index = 0;
 
+        // Functions
+        setInterval(function(){
+            images[index].classList.remove(active);
+            index = (index + 1) % 4
+            images[index].classList.add(active);
+        }, 3000)
+   }
 </script>
