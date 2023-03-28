@@ -8,10 +8,13 @@
         --darkBack: black;
     }
     body{
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
         height: 100%;
         color: var(--col);
         background: var(--back);
         font-size: 18px;
+    }
+    h2{
     }
     body > section {
         background: var(--back);
@@ -46,12 +49,12 @@
     }
     section{
         min-height: 90%;
-        border: 0px red solid;
         margin-bottom: -3em;
         padding: 0rem;
     }
     /* I love this scrolling effect */
     h2{ 
+        font-family: 'Times New Roman', Times, serif;
         opacity: 80%;
         font-weight: 10000;
         margin:0;
@@ -59,6 +62,11 @@
         position: sticky;
         top: 30%;
         font-size: 8rem;
+        z-index: 0;
+    }
+    section > div{
+        position: relative;
+        z-index: 1;
     }
     /* Custom Theme Colours */
     .theme1{
@@ -88,7 +96,6 @@
     .placeholder{
         height: 300px;
         width: 300px;
-        /* background: #f700ff; */
     }
     #themeSelect{
         border-radius: 10rem;
@@ -118,7 +125,6 @@
         width: 100%;
         height: 60%;
     }
-    .container > div{border: 1px solid black;}
     #welcomeImage{
         grid-column-start: 6;
         grid-column-end: 11;
@@ -138,7 +144,7 @@
         grid-column-end: 13;
         grid-row-start: 1;
         grid-row-end: 13;
-        background: red;
+        /* background: red; */
     }
     #carousel div.arrow{
         display: none;
@@ -164,11 +170,11 @@
         grid-column-end: 13;
         grid-row-start: 1;
         grid-row-end: 13;
-        background: yellowgreen;
+        /* background: yellowgreen; */
         display: grid;
         grid-template-columns: 3fr auto 1fr;
         grid-template-rows: repeat(5, 1fr);
-
+        font-size: 18px;
     }
     #aboutMe>div{
         display: inline;
@@ -192,7 +198,15 @@
         grid-column-end: 13;
         grid-row-start: 1;
         grid-row-end: 13;
-        background: rgb(255, 208, 0);
+        /* background: rgb(255, 208, 0); */
+        display: flex;
+        gap: 1rem;
+    }
+    div.article{
+        background: palevioletred;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 </style>
 <body class="a b c d">
@@ -228,7 +242,6 @@
             <div id="carousel">
                 <div class="arrow icon">Arrow</div>
                 <div id="slider">
-                    
                     <img src="assets/websites/swipe.jpeg" alt="" class="active">
                     <img src="assets/websites/langton.png" alt="">
                     <img src="assets/websites/coffeeshop.jpeg" alt="">
@@ -257,7 +270,16 @@
     <section>
         <h2>Blog</h2>
         <div class="placeholder container">
-            <div id="blogArticles">Blog Articles</div>
+            <div id="blogArticles">
+                <div class="article">
+                    <h3>Dynamic Text Updating</h3>
+                    <p>This is a fake article on updating text</p>
+                    <div style="width: 300px; height:300px; background: grey;"></div>
+                </div>
+                <div class="article">
+                    <button class="addArticle" click="console.log('Feature unavailable')">Click here to add create a new article</button>
+                </div>
+            </div>
         </div>
     </section>
 </body>
@@ -278,7 +300,7 @@
         const light = "light";
         const dark = "dark";
         const theme = ["theme1","theme2","theme3","theme4",];
-        let modeState = dark;
+        let modeState = light;
         let currentTheme = theme[0];
         
         // Functions
@@ -305,6 +327,9 @@
         themeSelect.addEventListener("change", e=>{
             changeTheme(e.target.value)
         })
+        
+        // Initial function
+        updateModeTheme();
    }
    Carousel:
    {
