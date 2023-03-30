@@ -102,7 +102,7 @@
     }
     .theme2{
         --theme2-lightCol:#66081d;
-        --theme2-lightHighlight:#985dbb;
+        --theme2-lightHighlight:#f096e2;
         --theme2-darkCol:#c66ae7;
         --theme2-darkHighlight:#fa4c07;
         --lightCol:var(--theme2-lightCol);
@@ -243,6 +243,7 @@
     .slide > img{
         width: 720px;
         object-fit: cover;
+        object-position: top;
         height: 405px;
     }
     .slide > h3{
@@ -252,6 +253,24 @@
     #slideTimer{
         width: 100%;
     }
+    /* Slide Popups */
+    .slide > dialog{
+        background: #c2c2c2;
+        padding:0;
+    }
+    .slide > dialog > .popup{
+        max-width: calc(100% - 4rem);
+        width: 100%;
+        height: 100%;
+        padding: 2rem;
+    }
+    .popup > img{
+        width: 900px;
+        max-height: 35rem;
+        object-fit: cover;
+        object-position: top;
+    }
+
     /* ABOUT ME SECTION */
     #aboutMe{
         grid-column-start: 6;
@@ -368,26 +387,71 @@
                     </svg>
                     <!-- <img src="assets/Use/arrow.svg" alt="" style="transform: scaleX(-1);"> -->
                 </div>
+
                 <div id="slider">
                     <div class="slide active">
                         <h3>Swipe Notes</h3>
                         <img src="assets/websites/swipe.jpeg" alt="">
+                        <dialog>
+                            <div class="popup">
+                                <h3>Swipe Notes</h3>
+                                <img src="assets/websites/swipe.jpeg" alt="">
+                                <p>An implementation of mouse and touch based swiping interactions in a note add.</p>
+                                <a href="https://davidclegg.github.io/Swipe-notes/" target="_blank">Link to Preview</a>
+                                <a href="https://github.com/DavidClegg/Swipe-notes" target="_blank">Link to Github</a>
+                            </div>
+                        </dialog>
                     </div>
                     <div class="slide">
                         <h3>Langton's Ant</h3>
                         <img src="assets/websites/langton.png" alt="">
+                        <dialog>
+                            <div class="popup">
+                                <h3>Langton's Ant</h3>
+                                <img src="assets/websites/langton.png" alt="">
+                                <p>A simple cellular automata rendered to a canvas element.</p>
+                                <a href="https://davidclegg.github.io/LangtonsAnt/" target="_blank">Link to Preview</a>
+                                <a href="https://github.com/DavidClegg/LangtonsAnt" target="_blank">Link to Github</a>
+                            </div>
+                        </dialog>
                     </div>
                     <div class="slide">
                         <h3>Coffee Shop</h3>
                         <img src="assets/websites/coffeeshop.jpeg" alt="">
+                        <dialog>
+                            <div class="popup">
+                                <h3>Coffe Shop</h3>
+                                <img src="assets/websites/coffeeshop.jpeg" alt="">
+                                <p>A fictional coffee shop website built with Wordpress</p>
+                                <p>NO PREVIEW AVAILABLE</p>
+                            </div>
+                        </dialog>
                     </div>
                     <div class="slide">
                         <h3>Paralax Scroll</h3>
                         <img src="assets/websites/paralax.jpeg" alt="">
+                        <dialog>
+                            <div class="popup">
+                                <h3>Paralax Scrolling</h3>
+                                <img src="assets/websites/paralax.jpeg" alt="">
+                                <p>An implementation of a paralax background effect</p>
+                                <a href="https://davidclegg.github.io/parallax-html-effect/" target="_blank">Link to Preview</a>
+                                <a href="https://github.com/DavidClegg/parallax-html-effect" target="_blank">Link to Github</a>
+                            </div>
+                        </dialog>
                     </div>
                     <div class="slide">
                         <h3>Rome Rental</h3>
                         <img src="assets/websites/rome.jpeg" alt="">
+                        <dialog>
+                            <div class="popup">
+                                <h3>Rome Rental</h3>
+                                <img src="assets/websites/rome.jpeg" alt="">
+                                <p>A mockup website for a home rental in Rome</p>
+                                <a href="https://davidclegg.github.io/RomeRental/" target="_blank">Link to Preview</a>
+                                <a href="https://github.com/DavidClegg/RomeRental" target="_blank">Link to Github</a>
+                            </div>
+                        </dialog>
                     </div>
                 </div>
                 
@@ -419,7 +483,8 @@
         Light/Dark Switch   | Advanced
         Theme Select        | Advanced
         User Preferences    | None
-        Carousel            | Basic
+        Carousel            | Advanced
+        Project Popup       | None
         Interactive Blog    | None
     */
    Theme:
@@ -490,7 +555,7 @@
             const next = document.querySelector("#next");
             let index = 0;
             let current = Date.now();
-            let buffer = 5000;
+            let buffer = 4000;
             let target = current + buffer;
 
         // Functions
@@ -522,9 +587,60 @@
             // Main loop
             setInterval(function(){
                 current = Date.now();
+                // console.log(`Current: ${current} | Target: ${target} | Remaining: ${target - current}`)
                 if(current > target){
                     nextImage();
                 }
             }, 100)
+
+    // Dialog Popup        
+        // Functions
+            function popup(element){
+                console.log("CLICK")
+                console.log(element)
+                let dialog = element.querySelector("dialog");
+                console.log(dialog)
+            };
+            
+            function pauseTimer(){
+                // set the target to double current. It will take like 40 years to reach so I don't really worry.
+                target = target * 2;
+                console.log(target)
+            }
+        // Event Listeners
+        slides.forEach(slide => {
+            let dialog = slide.querySelector("dialog");
+            let popup = dialog.querySelector(".popup");
+            slide.addEventListener("click", event=>{
+                dialog.showModal();
+                pauseTimer();
+            });
+            popup.addEventListener("click", event=>{
+                event.stopPropagation();
+            });
+            dialog.addEventListener("click", event=>{
+                event.stopPropagation();
+                dialog.close();
+                console.log("CLOSE")
+            });
+            dialog.addEventListener("close", event=>{
+                target = Date.now() + buffer;
+            });
+        });
     }
 </script>
+
+<!-- <script>
+    
+    function openDialog(el){
+        let id = el.dataset.dialog;
+        let target = document.querySelector(id);
+        target.showModal();
+    }
+    let popups = document.querySelectorAll(".popup");
+    [...popups].forEach(popup => {
+        popup.addEventListener("click",function(event){
+        event.stopPropagation();
+        })
+    }) 
+</script> -->
