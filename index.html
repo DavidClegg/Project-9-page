@@ -35,6 +35,7 @@
     body.dark h2{
         text-shadow: 00px 00px 3rem var(--darkCol);
     }
+    /* MENU BAR */
     menu{
         color: black;
         padding: 1rem;
@@ -60,7 +61,7 @@
     }
     section{
         min-height: 90%;
-        margin-bottom: -3em;
+        margin-bottom: -1.9em;
         padding: 0rem;
     }
     /* I love this scrolling effect */
@@ -83,7 +84,7 @@
     /* Custom Theme Colours */
     .theme1{
         --theme1-lightCol:#011f2b;
-        --theme1-lightHighlight:#04fbe7;
+        --theme1-lightHighlight:#31ff82;
         --theme1-darkCol:#04fbe7;
         --theme1-darkHighlight:#f48840;
         --lightCol:var(--theme1-lightCol);
@@ -171,10 +172,6 @@
         background: var(--theme5-darkHighlight);
         border-color: var(--theme5-darkCol);
     }
-    .placeholder{
-        height: 300px;
-        width: 300px;
-    }
     #mode{
         cursor: pointer;
         border-radius: 10rem;
@@ -195,6 +192,7 @@
         width: 100%;
         height: 60%;
     }
+    /* WELCOME SECTION */
     #welcomeImage{
         grid-column-start: 6;
         grid-column-end: 11;
@@ -212,15 +210,25 @@
     .active{
         display: block !important;
     }
+    /* PROJECT SECTION */
     #carousel{
         grid-column-start: 5;
         grid-column-end: 13;
         grid-row-start: 1;
         grid-row-end: 13;
         /* background: red; */
+        /* border: 1px red solid; */
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        margin-top: 100px;
     }
-    #carousel div.arrow{
-        display: none;
+    .arrow{
+        width: 100px;
+        place-self: center;
+        cursor: pointer;
+    }
+    .arrow#prev{
+        transform: scaleX(-1);
     }
     #slider{
         width: 100%;
@@ -229,14 +237,24 @@
         justify-content: center;
         align-items: center;
     }
-    #slider > img{
+    #slider > .slide{
         display: none;
-        width: 800px;
-        object-fit: cover;
-        height: 450px;
     }
+    .slide > img{
+        width: 720px;
+        object-fit: cover;
+        height: 405px;
+    }
+    .slide > h3{
+        font-size: 32px;
+        padding-left: 3rem;
+    }
+    #slideTimer{
+        width: 100%;
+    }
+    /* ABOUT ME SECTION */
     #aboutMe{
-        grid-column-start: 5;
+        grid-column-start: 6;
         grid-column-end: 13;
         grid-row-start: 1;
         grid-row-end: 13;
@@ -263,25 +281,7 @@
         grid-row-end: 13;
         grid-column-start: 2;
     }
-    #blogArticles{
-        grid-column-start: 4;
-        grid-column-end: 13;
-        grid-row-start: 1;
-        grid-row-end: 13;
-        /* background: rgb(255, 208, 0); */
-        display: flex;
-        gap: 1rem;
-    }
-    div.article{
-        background: var(--highlight);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        color: #000;
-        border-radius: 1rem;
-        padding: 1rem;
-        width: 18rem;
-    }
+   /* Extending the theme section */
     .disc{
         height: 30px;
         width: 30px;
@@ -321,9 +321,9 @@
 <body class="a b c d">
     <menu>
         <nav>
-            <a href="">projects</a>
-            <a href="">about me</a>
-            <a href="">blog</a>
+            <a href="#Projects">projects</a>
+            <a href="#About">about me</a>
+            <a href="article.html">blog</a>
         </nav>
         <div class="themeSection">
             Contrast:
@@ -346,7 +346,7 @@
     </menu>
     <section style="min-height: 30%;">
         <h2>Welcome</h2>
-        <div class="placeholder container">
+        <div class="container">
             <div id="welcomeImage">
                 <img src="assets/Use/theme1-alpha-900px.png" class="active" alt="">
                 <img src="assets/Use/theme2-alpha-900px.png" class="" alt="">
@@ -358,26 +358,51 @@
         </div>
     </section>
     <section>
-        <h2>Projects</h2>
-        <div class="placeholder container">
+        <h2 id="Projects">Projects</h2>
+        <div class="container">
             <div id="carousel">
-                <div class="arrow icon">Arrow</div>
+                <div class="arrow icon" id="prev">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="100" height="100" viewBox="0 0 100 100" xml:space="preserve">
+                        <desc>Created with Fabric.js 5.2.4</desc>
+                        <path style="stroke: rgb(255,0,0); stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: var(--highlight); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke"  transform=" translate(0, 0)" d="M 46.971 82.136 C 49.800999999999995 84.91799999999999 54.336 84.91799999999999 57.165 82.136 L 84.187 55.114999999999995 C 86.966 52.285999999999994 86.966 47.699999999999996 84.187 44.92099999999999 L 57.165 17.899 C 54.336 15.07 49.8 15.07 46.971 17.899 C 43.312999999999995 21.752000000000002 51.312999999999995 32.532 55.117 42.189 L 17.51 42.189 C 14.875000000000002 42.189 12.73 44.336 12.73 46.921 L 12.73 54.188 C 12.73 56.823 14.876000000000001 58.969 17.51 58.969 L 54.628 58.969 C 50.775 68.091 43.653 77.844 46.971 82.136 z" stroke-linecap="round"/>
+                    </svg>
+                    <!-- <img src="assets/Use/arrow.svg" alt="" style="transform: scaleX(-1);"> -->
+                </div>
                 <div id="slider">
-                    <img src="assets/websites/swipe.jpeg" alt="" class="active">
-                    <img src="assets/websites/langton.png" alt="">
-                    <img src="assets/websites/coffeeshop.jpeg" alt="">
-                    <img src="assets/websites/paralax.jpeg" alt="">
-                    <img src="assets/websites/rome.jpeg" alt="">
+                    <div class="slide active">
+                        <h3>Swipe Notes</h3>
+                        <img src="assets/websites/swipe.jpeg" alt="">
+                    </div>
+                    <div class="slide">
+                        <h3>Langton's Ant</h3>
+                        <img src="assets/websites/langton.png" alt="">
+                    </div>
+                    <div class="slide">
+                        <h3>Coffee Shop</h3>
+                        <img src="assets/websites/coffeeshop.jpeg" alt="">
+                    </div>
+                    <div class="slide">
+                        <h3>Paralax Scroll</h3>
+                        <img src="assets/websites/paralax.jpeg" alt="">
+                    </div>
+                    <div class="slide">
+                        <h3>Rome Rental</h3>
+                        <img src="assets/websites/rome.jpeg" alt="">
+                    </div>
                 </div>
                 
-                <div class="arrow icon">Arrow</div>
-
+                <div class="arrow icon" id="next">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="100" height="100" viewBox="0 0 100 100" xml:space="preserve">
+                        <desc>Created with Fabric.js 5.2.4</desc>
+                        <path style="stroke: rgb(255,0,0); stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: var(--highlight); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke"  transform=" translate(0, 0)" d="M 46.971 82.136 C 49.800999999999995 84.91799999999999 54.336 84.91799999999999 57.165 82.136 L 84.187 55.114999999999995 C 86.966 52.285999999999994 86.966 47.699999999999996 84.187 44.92099999999999 L 57.165 17.899 C 54.336 15.07 49.8 15.07 46.971 17.899 C 43.312999999999995 21.752000000000002 51.312999999999995 32.532 55.117 42.189 L 17.51 42.189 C 14.875000000000002 42.189 12.73 44.336 12.73 46.921 L 12.73 54.188 C 12.73 56.823 14.876000000000001 58.969 17.51 58.969 L 54.628 58.969 C 50.775 68.091 43.653 77.844 46.971 82.136 z" stroke-linecap="round"/>
+                    </svg>
+                </div>
             </div>
         </div>
     </section>
     <section>
-        <h2>About</h2>
-        <div class="placeholder container">
+        <h2 id="About">About Me</h2>
+        <div class="container">
             <div id="aboutMe">
                 <div>
                     <p>Hi👋</p>
@@ -388,27 +413,11 @@
             </div>
         </div>
     </section>
-    <section>
-        <h2>Blog</h2>
-        <div class="placeholder container">
-            <div id="blogArticles">
-                <div class="article">
-                    <h3>Dynamic Text Updating</h3>
-                    <p>This is a fake article on updating text</p>
-                    <div style="width: 300px; height:300px; background: grey;"></div>
-                    <p>This is a short excerpt to explain what the article is about</p>
-                </div>
-                <div class="article">
-                    <button class="addArticle" onclick="alert('Feature unavailable')">Click here to add create a new article</button>
-                </div>
-            </div>
-        </div>
-    </section>
 </body>
 <script>
     /* Features             | Implementation
-        Light/Dark Switch   | Basic
-        Theme Select        | Basic
+        Light/Dark Switch   | Advanced
+        Theme Select        | Advanced
         User Preferences    | None
         Carousel            | Basic
         Interactive Blog    | None
@@ -421,6 +430,7 @@
         const themeSelect = document.querySelector("#themeSelect");
         const themeContainer = document.querySelector(".listContainer");
         const themeButtons = document.querySelectorAll(".themeList > .themeItem");
+        const themeImages = document.querySelectorAll("#welcomeImage > img");
         const light = "light";
         const dark = "dark";
         const themeItem = "themeItem";
@@ -447,7 +457,9 @@
             updateModeTheme();
         }
         function changeTheme(i){
+            document.querySelector("#welcomeImage .active").classList.remove(active);
             currentTheme = theme[i];
+            themeImages[i].classList.add(active);
             updateModeTheme();
         }
         function showThemes(){
@@ -471,15 +483,48 @@
    Carousel:
    {
         // Variables
-        const active = "active";
-        const images = document.querySelectorAll("#slider img");
-        let index = 0;
+            const active = "active";
+            const slides = document.querySelectorAll("#slider > .slide");
+            const length = slides.length;
+            const prev = document.querySelector("#prev");
+            const next = document.querySelector("#next");
+            let index = 0;
+            let current = Date.now();
+            let buffer = 5000;
+            let target = current + buffer;
 
         // Functions
-        setInterval(function(){
-            images[index].classList.remove(active);
-            index = (index + 1) % 4
-            images[index].classList.add(active);
-        }, 3000)
-   }
+            function nextImage(){
+                selectImage(index + 1);
+                setTimer();
+            }
+            
+            function prevImage(){
+                selectImage(index - 1);
+                setTimer();
+            }
+
+            function selectImage(value){
+                slides[index].classList.remove(active);
+                index = value < 0? length - 1: value == length? 0 : value
+                slides[index].classList.add(active);
+            }
+
+            function setTimer(){
+                current = Date.now();
+                target = current + buffer;
+            }
+            
+            // Event Listeners
+            next.addEventListener("click", nextImage);
+            prev.addEventListener("click", prevImage);
+            
+            // Main loop
+            setInterval(function(){
+                current = Date.now();
+                if(current > target){
+                    nextImage();
+                }
+            }, 100)
+    }
 </script>
