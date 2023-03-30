@@ -41,6 +41,13 @@
         background: #ffffff99;
         display: flex;
         justify-content: space-between;
+        align-items: center;
+    }
+    .themeSection{
+        display:flex;
+        place-items: center;
+        place-content: center;
+        gap: 1rem;
     }
     menu > div{
         flex-grow: 1;
@@ -75,49 +82,101 @@
     }
     /* Custom Theme Colours */
     .theme1{
-        --lightCol:#011f2b;
-        --lightHighlight:#04fbe7;
-        --darkCol:#04fbe7;
-        --darkHighlight:#f48840;
+        --theme1-lightCol:#011f2b;
+        --theme1-lightHighlight:#04fbe7;
+        --theme1-darkCol:#04fbe7;
+        --theme1-darkHighlight:#f48840;
+        --lightCol:var(--theme1-lightCol);
+        --lightHighlight:var(--theme1-lightHighlight);
+        --darkCol:var(--theme1-darkCol);
+        --darkHighlight:var(--theme1-darkHighlight);
+    }
+    body.light .theme1{
+        background: var(--theme1-lightHighlight);
+        border-color: var(--theme1-lightCol);
+    }
+    body.dark .theme1{
+        background: var(--theme1-darkHighlight);
+        border-color: var(--theme1-darkCol);
     }
     .theme2{
-        --lightCol:#66081d;
-        --lightHighlight:#985dbb;
-        --darkCol:#c66ae7;
-        --darkHighlight:#fa4c07;
+        --theme2-lightCol:#66081d;
+        --theme2-lightHighlight:#985dbb;
+        --theme2-darkCol:#c66ae7;
+        --theme2-darkHighlight:#fa4c07;
+        --lightCol:var(--theme2-lightCol);
+        --lightHighlight:var(--theme2-lightHighlight);
+        --darkCol:var(--theme2-darkCol);
+        --darkHighlight:var(--theme2-darkHighlight);
+    }
+    body.light .theme2{
+        background: var(--theme2-lightHighlight);
+        border-color: var(--theme2-lightCol);
+    }
+    body.dark .theme2{
+        background: var(--theme2-darkHighlight);
+        border-color: var(--theme2-darkCol);
     }
     .theme3{
-        --lightCol:#850a14;
-        --lightHighlight:#2c0810;
-        --darkCol:#fde6db;
-        --darkHighlight:#6f030c;
+        --theme3-lightCol:#850a14;
+        --theme3-lightHighlight:#2c0810;
+        --theme3-darkCol:#fde6db;
+        --theme3-darkHighlight:#6f030c;
+        --lightCol:var(--theme3-lightCol);
+        --lightHighlight:var(--theme3-lightHighlight);
+        --darkCol:var(--theme3-darkCol);
+        --darkHighlight:var(--theme3-darkHighlight);
+    }
+    body.light .theme3{
+        background: var(--theme3-lightHighlight);
+        border-color: var(--theme3-lightCol);
+    }
+    body.dark .theme3{
+        background: var(--theme3-darkHighlight);
+        border-color: var(--theme3-darkCol);
     }
     .theme4{
-        --lightCol:#ffde00;
-        --lightHighlight:#14316b;
-        --darkCol:#adeff1;
-        --darkHighlight:#fcd31b;
+        --theme4-lightCol:#ffde00;
+        --theme4-lightHighlight:#14316b;
+        --theme4-darkCol:#adeff1;
+        --theme4-darkHighlight:#fcd31b;
+        --lightCol:var(--theme4-lightCol);
+        --lightHighlight:var(--theme4-lightHighlight);
+        --darkCol:var(--theme4-darkCol);
+        --darkHighlight:var(--theme4-darkHighlight);
+    }
+    body.light .theme4{
+        background: var(--theme4-lightHighlight);
+        border-color: var(--theme4-lightCol);
+    }
+    body.dark .theme4{
+        background: var(--theme4-darkHighlight);
+        border-color: var(--theme4-darkCol);
     }
     .theme5{
-        --lightCol:#f9cf01;
-        --lightHighlight:#0d0b17;
-        --darkCol:#f9cf01;
-        --darkHighlight:#1ddffe;
+        --theme5-lightCol:#f9cf01;
+        --theme5-lightHighlight:#0d0b17;
+        --theme5-darkCol:#f9cf01;
+        --theme5-darkHighlight:#1ddffe;
+        --lightCol:var(--theme5-lightCol);
+        --lightHighlight:var(--theme5-lightHighlight);
+        --darkCol:var(--theme5-darkCol);
+        --darkHighlight:var(--theme5-darkHighlight);
+    }
+    body.light .theme5{
+        background: var(--theme5-lightHighlight);
+        border-color: var(--theme5-lightCol);
+    }
+    body.dark .theme5{
+        background: var(--theme5-darkHighlight);
+        border-color: var(--theme5-darkCol);
     }
     .placeholder{
         height: 300px;
         width: 300px;
     }
-    #themeSelect{
-        border-radius: 10rem;
-        padding: 1rem;
-    }
-    #themeSelect > option{
-        appearance: none;
-        border-radius: 10rem;
-        padding: 1rem;
-    }
     #mode{
+        cursor: pointer;
         border-radius: 10rem;
         padding: 0rem;
         font-size: 2rem;
@@ -149,10 +208,9 @@
         border: 0px solid black;
         border-radius: 2rem;
         object-fit: cover;
-        transform: scaleX(-1);
     }
-    #welcomeImage > img.active{
-        display: block;
+    .active{
+        display: block !important;
     }
     #carousel{
         grid-column-start: 5;
@@ -176,9 +234,6 @@
         width: 800px;
         object-fit: cover;
         height: 450px;
-    }
-    #carousel #slider img.active{
-        display: block;
     }
     #aboutMe{
         grid-column-start: 5;
@@ -218,41 +273,86 @@
         gap: 1rem;
     }
     div.article{
-        background: palevioletred;
+        background: var(--highlight);
         display: flex;
         flex-direction: column;
         align-items: center;
+        color: #000;
+        border-radius: 1rem;
+        padding: 1rem;
+        width: 18rem;
     }
+    .disc{
+        height: 30px;
+        width: 30px;
+        background: red;
+        border: 10px solid blue;
+    }
+    .themeOuter{
+        display: inline-block;
+    }
+    .listContainer{
+        z-index: 10;
+        display: none;
+        position: relative;
+        /* padding-top: 1rem; */
+    }
+    .themeList{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        list-style-type: none;
+        margin-top: 0.5rem;
+        padding:0.5rem;
+        border-radius: 1rem;
+        position: absolute;
+    }
+    body.light .themeList{background: rgb(233, 233, 233);}
+    body.dark .themeList{background: rgb(70,70,70);}
+    .themeItem{
+        cursor: pointer;
+        border-radius: 2rem;
+        height: 2rem;
+        width: 2rem;
+        border: solid 1rem;
+    }
+    
 </style>
 <body class="a b c d">
     <menu>
-        <div>logo</div>
         <nav>
             <a href="">projects</a>
             <a href="">about me</a>
             <a href="">blog</a>
         </nav>
-        <div>
+        <div class="themeSection">
+            Contrast:
             <button id="mode" data-mode="light" onclick="changeMode()">🌓</button>
-            Theme
-            <select name="" id="themeSelect">
-                <option value="0">a</option>
-                <option value="1">b</option>
-                <option value="2">c</option>
-                <option value="3">d</option>
-                <option value="4">e</option>
-            </select>
+            Theme:
+            <!-- Change the below to a list of some kind -->
+            <div class="themeOuter">
+                <div id="themeSelect" class="themeItem"></div>
+                <div class="listContainer">
+                    <ul class="themeList">
+                        <li data-number="0"class="themeItem theme1"></li>
+                        <li data-number="1"class="themeItem theme2"></li>
+                        <li data-number="2"class="themeItem theme3"></li>
+                        <li data-number="3"class="themeItem theme4"></li>
+                        <li data-number="4"class="themeItem theme5"></li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </menu>
-    <section>
+    <section style="min-height: 30%;">
         <h2>Welcome</h2>
         <div class="placeholder container">
             <div id="welcomeImage">
-                <img src="assets/Use/theme5-alpha-900px.png" class="active" alt="">
                 <img src="assets/Use/theme1-alpha-900px.png" class="active" alt="">
-                <img src="assets/Use/theme2-alpha-900px.png" class="active" alt="">
-                <img src="assets/Use/theme3-alpha-900px.png" class="active" alt="">
-                <img src="assets/Use/theme4-alpha.png" class="active" alt="">
+                <img src="assets/Use/theme2-alpha-900px.png" class="" alt="">
+                <img src="assets/Use/theme3-alpha-900px.png" class="" alt="">
+                <img src="assets/Use/theme4-alpha.png" class="" alt="">
+                <img src="assets/Use/theme5-alpha-900px.png" class="" alt="">
                 
             </div>
         </div>
@@ -296,9 +396,10 @@
                     <h3>Dynamic Text Updating</h3>
                     <p>This is a fake article on updating text</p>
                     <div style="width: 300px; height:300px; background: grey;"></div>
+                    <p>This is a short excerpt to explain what the article is about</p>
                 </div>
                 <div class="article">
-                    <button class="addArticle" click="alert('Feature unavailable')">Click here to add create a new article</button>
+                    <button class="addArticle" onclick="alert('Feature unavailable')">Click here to add create a new article</button>
                 </div>
             </div>
         </div>
@@ -318,11 +419,15 @@
         const body = document.querySelector("body");
         const mode = document.querySelector("#mode");
         const themeSelect = document.querySelector("#themeSelect");
+        const themeContainer = document.querySelector(".listContainer");
+        const themeButtons = document.querySelectorAll(".themeList > .themeItem");
         const light = "light";
         const dark = "dark";
+        const themeItem = "themeItem";
+        const active = "active";
         const theme = ["theme1","theme2","theme3","theme4","theme5"];
-        let modeState = [light, dark][1];
-        let currentTheme = theme[5];
+        let modeState = [light, dark][0];
+        let currentTheme = theme[0];
         
         // Functions
         function updateModeTheme(){
@@ -330,6 +435,8 @@
             body.className = "";
             body.classList.add(modeState);
             body.classList.add(currentTheme);
+            themeSelect.className = themeItem;
+            themeSelect.classList.add(currentTheme);
         }
         function changeMode(){
             if(modeState == light){
@@ -343,12 +450,20 @@
             currentTheme = theme[i];
             updateModeTheme();
         }
+        function showThemes(){
+            themeContainer.classList.toggle(active)
+        };
         
         // Events
-        themeSelect.addEventListener("change", e=>{
-            changeTheme(e.target.value)
+        themeSelect.addEventListener("click", e=>{
+            showThemes();
         })
-        
+        themeButtons.forEach(button => {
+            button.addEventListener("click", e=>{
+                changeTheme(e.target.dataset.number);
+                showThemes();
+            })
+        })
         // Initial function
         updateModeTheme();
    }
