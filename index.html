@@ -506,14 +506,18 @@
         
         // Functions
         function updateModeTheme(){
+            // Update the contrast mode
             mode.innerText = {light: "🌞", dark: "🌓"}[modeState];
+            // Clear to body class name and set it as "mode theme"
             body.className = "";
             body.classList.add(modeState);
             body.classList.add(currentTheme);
+            // Clear the selected theme class name and set it to "themeItem theme"
             themeSelect.className = themeItem;
             themeSelect.classList.add(currentTheme);
         }
         function changeMode(){
+            // Simple toggle to change between light and dark mode
             if(modeState == light){
                 modeState = dark;
             } else {
@@ -522,12 +526,15 @@
             updateModeTheme();
         }
         function changeTheme(i){
+            // Remove the active from the previous element
             document.querySelector("#welcomeImage .active").classList.remove(active);
             currentTheme = theme[i];
+            // Set the next element to active
             themeImages[i].classList.add(active);
             updateModeTheme();
         }
         function showThemes(){
+            // Simple custom drop-down element 
             themeContainer.classList.toggle(active)
         };
         
@@ -537,11 +544,12 @@
         })
         themeButtons.forEach(button => {
             button.addEventListener("click", e=>{
+                // Set the clicked theme to be active
                 changeTheme(e.target.dataset.number);
                 showThemes();
             })
         })
-        // Initial function
+        // Initial function to set the basic theme
         updateModeTheme();
    }
 
@@ -555,7 +563,7 @@
             const next = document.querySelector("#next");
             let index = 0;
             let current = Date.now();
-            let buffer = 4000;
+            let buffer = 4000; // 4000ms or 4 second delay
             let target = current + buffer;
 
         // Functions
@@ -570,77 +578,65 @@
             }
 
             function selectImage(value){
+                // Remove the active class from the active slide
                 slides[index].classList.remove(active);
+                // Updates the index, with checks to make sure the value doesn't exceed the array range
                 index = value < 0? length - 1: value == length? 0 : value
+                // Sets the new slide to active
                 slides[index].classList.add(active);
+
+                // Removing the active class from the active slide is implemented different here than in the theme section to demonstrate the diversity of solutions that a simple problem can have in JavaScript.
             }
 
             function setTimer(){
+                // This updates the timer.
+                // This is to allow a user to click the arrows and progress or regress the slideshow without getting the bug of clicking a slide and it disappearing soon after.
                 current = Date.now();
                 target = current + buffer;
+            }
+            
+            function pauseTimer(){
+                // Set the target to double current. 
+                // It will take like 40 years to reach so I don't really worry.
+                target = target * 2;
             }
             
             // Event Listeners
             next.addEventListener("click", nextImage);
             prev.addEventListener("click", prevImage);
+
+            slides.forEach(slide => {
+                let dialog = slide.querySelector("dialog");
+                let popup = dialog.querySelector(".popup");
+                slide.addEventListener("click", event=>{
+                    // When slide is clicked I show the popup and pause the timer
+                    dialog.showModal();
+                    pauseTimer();
+                });
+                popup.addEventListener("click", event=>{
+                    // This prevents clicking on the popup window from closing the dialog element by not passing the click event to the parent element
+                    event.stopPropagation();
+                });
+                dialog.addEventListener("click", event=>{
+                    // This is simply closes the dialog window when the page outside the popup is clicked
+                    event.stopPropagation();
+                    dialog.close();
+                });
+                dialog.addEventListener("close", event=>{
+                    // // When the dialog window closes I reset the 
+                    // target = Date.now() + buffer;
+                    setTimer();
+                });
+             });
             
             // Main loop
             setInterval(function(){
+                // Set current to the current time.
+                // If current time is past the target then go to the next image
                 current = Date.now();
-                // console.log(`Current: ${current} | Target: ${target} | Remaining: ${target - current}`)
                 if(current > target){
                     nextImage();
                 }
             }, 100)
-
-    // Dialog Popup        
-        // Functions
-            function popup(element){
-                console.log("CLICK")
-                console.log(element)
-                let dialog = element.querySelector("dialog");
-                console.log(dialog)
-            };
-            
-            function pauseTimer(){
-                // set the target to double current. It will take like 40 years to reach so I don't really worry.
-                target = target * 2;
-                console.log(target)
-            }
-        // Event Listeners
-        slides.forEach(slide => {
-            let dialog = slide.querySelector("dialog");
-            let popup = dialog.querySelector(".popup");
-            slide.addEventListener("click", event=>{
-                dialog.showModal();
-                pauseTimer();
-            });
-            popup.addEventListener("click", event=>{
-                event.stopPropagation();
-            });
-            dialog.addEventListener("click", event=>{
-                event.stopPropagation();
-                dialog.close();
-                console.log("CLOSE")
-            });
-            dialog.addEventListener("close", event=>{
-                target = Date.now() + buffer;
-            });
-        });
     }
 </script>
-
-<!-- <script>
-    
-    function openDialog(el){
-        let id = el.dataset.dialog;
-        let target = document.querySelector(id);
-        target.showModal();
-    }
-    let popups = document.querySelectorAll(".popup");
-    [...popups].forEach(popup => {
-        popup.addEventListener("click",function(event){
-        event.stopPropagation();
-        })
-    }) 
-</script> -->
