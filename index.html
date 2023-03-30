@@ -2,10 +2,15 @@
     :root{
         --col: rgb(96, 138, 185);
         --back: rgb(183, 227, 235);
+        --highlight: red;
         --lightCol: black;
+        --lightHighlight: red;
         --lightBack: white;
+        --lightBack:#3b89ac;
         --darkCol: white;
+        --darkHighlight: red;
         --darkBack: black;
+        --darkBack: #011324;
     }
     body{
         font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -14,22 +19,21 @@
         background: var(--back);
         font-size: 18px;
     }
-    h2{
-    }
     body > section {
         background: var(--back);
     }
     body.light{
         --col: var(--lightCol);
         --back: var(--lightBack);
+        --highlight: var(--lightHighlight);
     }
     body.dark{
         --col: var(--darkCol);
         --back: var(--darkBack);
+        --highlight: var(--darkHighlight);
     }
     body.dark h2{
         text-shadow: 00px 00px 3rem var(--darkCol);
-        filter: brightness(200%);
     }
     menu{
         color: black;
@@ -63,6 +67,7 @@
         top: 30%;
         font-size: 8rem;
         z-index: 0;
+        text-decoration: underline var(--highlight);
     }
     section > div{
         position: relative;
@@ -70,28 +75,34 @@
     }
     /* Custom Theme Colours */
     .theme1{
-        --lightCol:#0c3247;
-        --lightBack:#04ada2;
-        --darkCol:#04ada2;
-        --darkBack:#031e2c;
+        --lightCol:#011f2b;
+        --lightHighlight:#04fbe7;
+        --darkCol:#04fbe7;
+        --darkHighlight:#f48840;
     }
     .theme2{
-        --lightCol:#400;
-        --lightBack:#a69;
-        --darkCol:#a7c;
-        --darkBack:rgb(51, 7, 7);
+        --lightCol:#66081d;
+        --lightHighlight:#985dbb;
+        --darkCol:#c66ae7;
+        --darkHighlight:#fa4c07;
     }
     .theme3{
-        --lightCol:#500;
-        --lightBack:#ecb;
-        --darkCol:#eb9;
-        --darkBack:rgb(51, 6, 19);
+        --lightCol:#850a14;
+        --lightHighlight:#2c0810;
+        --darkCol:#fde6db;
+        --darkHighlight:#6f030c;
     }
     .theme4{
-        --lightCol:#247;
-        --lightBack:#fd5;
-        --darkCol:#fd0;
-        --darkBack:rgb(10, 32, 43);
+        --lightCol:#ffde00;
+        --lightHighlight:#14316b;
+        --darkCol:#adeff1;
+        --darkHighlight:#fcd31b;
+    }
+    .theme5{
+        --lightCol:#f9cf01;
+        --lightHighlight:#0d0b17;
+        --darkCol:#f9cf01;
+        --darkHighlight:#1ddffe;
     }
     .placeholder{
         height: 300px;
@@ -133,11 +144,15 @@
         /* background: blue; */
     }
     #welcomeImage > img{
+        display: none;
         width: 100%;
         border: 0px solid black;
         border-radius: 2rem;
         object-fit: cover;
         transform: scaleX(-1);
+    }
+    #welcomeImage > img.active{
+        display: block;
     }
     #carousel{
         grid-column-start: 5;
@@ -225,6 +240,7 @@
                 <option value="1">b</option>
                 <option value="2">c</option>
                 <option value="3">d</option>
+                <option value="4">e</option>
             </select>
         </div>
     </menu>
@@ -232,7 +248,12 @@
         <h2>Welcome</h2>
         <div class="placeholder container">
             <div id="welcomeImage">
-                <img src="assets/Use/theme3-alpha-900px.png" alt="">
+                <img src="assets/Use/theme5-alpha-900px.png" class="active" alt="">
+                <img src="assets/Use/theme1-alpha-900px.png" class="active" alt="">
+                <img src="assets/Use/theme2-alpha-900px.png" class="active" alt="">
+                <img src="assets/Use/theme3-alpha-900px.png" class="active" alt="">
+                <img src="assets/Use/theme4-alpha.png" class="active" alt="">
+                
             </div>
         </div>
     </section>
@@ -299,9 +320,9 @@
         const themeSelect = document.querySelector("#themeSelect");
         const light = "light";
         const dark = "dark";
-        const theme = ["theme1","theme2","theme3","theme4",];
-        let modeState = light;
-        let currentTheme = theme[0];
+        const theme = ["theme1","theme2","theme3","theme4","theme5"];
+        let modeState = [light, dark][1];
+        let currentTheme = theme[5];
         
         // Functions
         function updateModeTheme(){
@@ -331,6 +352,7 @@
         // Initial function
         updateModeTheme();
    }
+
    Carousel:
    {
         // Variables

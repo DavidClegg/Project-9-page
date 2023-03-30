@@ -1,9 +1,56 @@
-<style>
+<!-- I Can't figure it out. I'm stupid. Go Fuck Myself -->
 
+<style>
+    :root{
+        --iColor: red;
+        --iBackground: none;
+        --iLine: underline;
+        --iLineStyle: double;
+    }
+    body{
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+    p{
+        display: inline;
+        font-size: 18px;
+        padding-bottom: 11rem;
+    }
+    .alert{
+        font-style: italic;
+        font-size: 14px;
+    }
+    .interactive{
+        display: inline-block;
+        color: var(--iColor);
+        font-weight: 600;
+        text-decoration: var(--iLine);
+        text-decoration-style: var(--iLineStyle);
+        cursor: pointer;
+    }
+    .interactive > .list{
+        padding:0;
+        display: inline-block;
+        position: fixed;
+        top: inherit;
+
+    }
+    .list > li{
+        list-style: none;
+        padding:0;
+        margin:0;
+    }
+    .hidden{
+        /* display: none; */
+    }
 </style>
 <body>
-    
+    <h1>Dynamic Text Styling</h1>
+    <p class="alert">Any words that are</p> <div class="interactive" id="interactionSet">Underlined Red<ul class="list hidden"><li>Underlined Red</li><li>Background Yellow</li></ul></div><p class="alert"> are interactive elements!</p>    
+<br>
+<p>There are many </p>
 </body>
 <script>
-    
+    let interactionSet = document.querySelector("#interationSet");
+
+
 </script>
