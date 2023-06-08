@@ -1,0 +1,88 @@
+<style>
+    html{width: 100%;}
+    body{width: 100%;
+        display: flex;
+    }
+    #palette{
+        width: 300px;
+        background: red;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(10, 150px);
+    }
+    .head{
+        grid-column: 1/3;
+        text-align: center;
+    }
+    .fish, .fish img{margin: 0 25px; width: 100px;}
+    #tank{
+        width: 700px;
+        background: blue;
+    }
+    .tankpic{width: 700px;}
+    #target{
+        position:fixed;
+        top: 100px;
+        left: 360px;
+        border: 1px dotted black;
+        width: 595px;
+        height: 330px;
+    }
+</style>
+<body>
+    <div id="palette">
+        <h2 class="head">Pick a fish</h2>
+        <img class="fish" src="/assets/Unused/fish/angelfish-drawing.jpg" alt="" draggable="true">
+        <div class="fish" draggable="true">
+            <img src="/assets/Unused/fish/Big-Brown-Crabs.png" alt="" draggable="true">
+        </div>
+        <div class="fish" draggable="true">
+            <img src="/assets/Unused/fish/Bigmouth-buffalo-fish.jpg" alt="" draggable="true">
+        </div>
+        <div class="fish" draggable="true">
+            <img src="/assets/Unused/fish/fairy-wrasse.jpg" alt="" draggable="true">
+        </div>
+    </div>
+    <div id="tank">
+        <img src="rectangular-glass-aquarium-pebble-ground-blue-water-empty-template-your-design-collages-vector-illustration-isolated-120421732.jpg" class="tankpic">
+        <div id="target">
+
+        </div>
+    </div>
+</body>
+<script>
+    const fishes = document.querySelectorAll(".fish");
+    const tank = document.querySelector("#target");
+    let dragged = null;
+    function dragstart(event){
+        console.log("dragstart")
+        console.log(event)
+        dragged = event.target;
+    }
+
+    function dragenter(event){
+        console.log("dragenter")
+        console.log(event)
+    }
+
+    function dragover(event){
+        // THIS IS CRUCIAL!!!
+        event.preventDefault();
+    }
+
+    function drop(event){
+        event.preventDefault();
+        console.log("drop")
+        console.log(event)
+        //dragged.parentNode.removeChild(dragged);
+    event.target.appendChild(dragged.cloneNode(true));
+    }
+
+    fishes.forEach(fish => fish.addEventListener("dragstart", dragstart));
+    fishes.forEach(fish => fish.addEventListener("drop", drop));
+
+    tank.addEventListener("dragover", dragover);
+    tank.addEventListener("dragenter", dragenter);
+    tank.addEventListener("drop", drop);
+
+</script>
